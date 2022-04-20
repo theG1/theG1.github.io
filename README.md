@@ -1,3 +1,3 @@
-test theG1
+test theG
 
-aismjdjifij
+테스트 페이지 표시입니다
