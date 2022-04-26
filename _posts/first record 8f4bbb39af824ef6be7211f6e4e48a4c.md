@@ -1,3 +1,8 @@
+---
+layout: post
+title: test02
+---
+
 # 첫 기록
 
 # 처음으로 기록합니다
