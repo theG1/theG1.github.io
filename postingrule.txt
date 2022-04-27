@@ -1,0 +1,11 @@
+- md file name : 2022-4-11-hi-first.md
+- layout: [main or post] // 게시물 레이아웃
+- type: [tech or life] // 페이지 분류
+- date: [yyyy-mm-dd HH:MM] // 글 작성 시간
+- category // 포스트 카테고리
+- title // 포스트 주제
+- subtitle // 포스트 부제
+- writer // 포스트 작성자
+- post-header // 포스트 header 사용 여부
+- header-img // 포스트 header 이미지
+- hash-tag // 포스트 해시태그
