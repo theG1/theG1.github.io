@@ -4,8 +4,8 @@ description: '클라우드를 다룹니다' # this means to ignore newlines unti
 permalink: ':title:output_ext'
 baseurl: "/" # the subpath of your site, e.g. /blog
 url: "https://theg1.github.io" # the base hostname & protocol for your site, e.g. http://example.com
-logo: "/assets/img/branding/logo.jpg"
-logo-icon: "/assets/img/branding/log.jpg"
+logo: "/assets/img/branding/logo.png"
+logo-icon: "/assets/img/branding/log.png"
 logo-icon-SEO: "/assets/img/branding/MVM-symbol-black.png" # must be a non SVG file
 
 # Night/Dark mode
