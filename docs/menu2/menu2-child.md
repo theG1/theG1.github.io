@@ -1,8 +1,8 @@
 ---
 layout: default
 title: Kubernetes
-nav_order: 3
-parent: Menu2
+nav_order: 2
+parent: Kubernetes
 ---
 
 # Kubernetes
