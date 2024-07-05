@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Kubernetes
+title: Kubernetes 설치
 nav_order: 2
 parent: Kubernetes
 ---
