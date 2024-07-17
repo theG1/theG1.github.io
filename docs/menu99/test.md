@@ -19,6 +19,11 @@ var fun = function lang(l) {
 }
 ```
 
+```shell
+ls -al
+
+```
+
 
 [Link button](https://just-the-docs.com){: .btn .btn-purple }
 [Link button](https://just-the-docs.com){: .btn .btn-blue }
