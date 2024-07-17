@@ -6,26 +6,10 @@ has_children: true
 permalink: /docs/menu99
 ---
 
-# Menu99
+# just the docs 테스트 페이지입니다.
 {: .no_toc }
 
-{: .highlight }
-A paragraph
-{: .warning }
-A paragraph
-{: .note }
-A paragraph
-{: .important }
-A paragraph
-{: .new }
-A paragraph
-{: .important }
-> {: .opaque }
-> <div markdown="block">
-> {: .warning }
-> A paragraph
-> </div>
->
+
 코드
 ```js
 // Javascript code with syntax highlighting.
@@ -67,6 +51,24 @@ Deprecated
 | ok           | good `zoute` drop | yumm  |
 
 
+콜아웃 기능은 현재 미구현
+{: .highlight }
+A paragraph
+{: .warning }
+A paragraph
+{: .note }
+A paragraph
+{: .important }
+A paragraph
+{: .new }
+A paragraph
+{: .important }
+> {: .opaque }
+> <div markdown="block">
+> {: .warning }
+> A paragraph
+> </div>
+>
 
 test Page tests
 {: .fs-6 .fw-300 }
