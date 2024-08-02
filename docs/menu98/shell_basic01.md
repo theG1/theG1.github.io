@@ -2,7 +2,7 @@
 layout: default
 title: Shell 기본 명령어
 nav_order: 2
-parent: Shell
+parent: shell script basic
 ---
 
 # Shell 기본 명령어
