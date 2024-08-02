@@ -1,7 +1,7 @@
 ---
 layout: default
 title: just the docs example
-nav_order: 3
+nav_order: 10
 has_children: true
 permalink: /docs/menu99
 ---
