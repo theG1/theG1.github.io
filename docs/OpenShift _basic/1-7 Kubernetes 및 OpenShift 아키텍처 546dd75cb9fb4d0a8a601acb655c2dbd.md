@@ -1,4 +1,10 @@
-# 1-7 Kubernetes 및 OpenShift 아키텍처
+---
+layout: default
+title: 1-3. Kubernetes 및 OpenShift 아키텍처
+nav_order: 2
+parent: Redhat OpenShift
+---
+# 1-3 Kubernetes 및 OpenShift 아키텍처
 
 # **목표**
 

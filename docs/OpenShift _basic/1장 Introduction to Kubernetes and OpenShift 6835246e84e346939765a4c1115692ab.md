@@ -1,6 +1,6 @@
 ---
 layout: default
-title: Introduction to Kubernetes and OpenShift
+title: 1. Introduction to Kubernetes and OpenShift
 nav_order: 2
 parent: Redhat OpenShift
 ---
