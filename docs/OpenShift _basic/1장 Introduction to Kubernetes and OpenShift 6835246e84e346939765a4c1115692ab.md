@@ -3,6 +3,7 @@ layout: default
 title: 1. Introduction to Kubernetes and OpenShift
 nav_order: 2
 parent: Redhat OpenShift
+has_children: true
 ---
 
 # 1장. Introduction to Kubernetes and OpenShift
