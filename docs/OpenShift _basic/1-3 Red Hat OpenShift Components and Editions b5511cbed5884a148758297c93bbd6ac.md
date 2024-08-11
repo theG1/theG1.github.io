@@ -1,3 +1,10 @@
+---
+layout: default
+title: Red Hat OpenShift Components and Editions
+nav_order: 3
+parent: Introduction to Kubernetes and OpenShift
+---
+
 # 1-3 Red Hat OpenShift Components and Editions
 
 # Red Hat OpenShift 구성 요소 및 에디션
