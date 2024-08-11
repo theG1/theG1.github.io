@@ -1,7 +1,7 @@
 ---
 layout: default
 title: Redhat OpenShift
-nav_order: 9
+nav_order: 2
 has_children: true
 permalink: /docs/OpenShift_basic
 ---
