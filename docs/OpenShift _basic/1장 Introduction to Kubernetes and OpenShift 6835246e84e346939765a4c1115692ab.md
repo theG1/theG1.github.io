@@ -1,3 +1,10 @@
+---
+layout: default
+title: Introduction to Kubernetes and OpenShift
+nav_order: 2
+parent: Redhat OpenShift
+---
+
 # 1장. Introduction to Kubernetes and OpenShift
 
 # 전통적인 애플리케이션 배포
