@@ -35,9 +35,9 @@ parent: Redhat OpenShift
             - **Secret** **및 Config 관리**: 비공개로 유지해야 하는 Secret, Config 에 대해 컨테이너를 다시 빌드하지 않고도 애플리케이션의 Config와 secret을 관리할 수 있다.
         
     4. **Kubernetes 커뮤니티와 에코시스템**
-        
-        ![Kubernetes 커뮤니티 에코시스템](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled.png)
-        
+        ![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled.png)
+        ![Kubernetes 커뮤니티 에코시스템]
+
         Kubernetes 커뮤니티 에코시스템
         
         - Kubernetes는 단순히 하나의 툴이 아닌, 다양한 툴과 기여자로 구성된 커뮤니티로 발전.
@@ -76,8 +76,7 @@ parent: Redhat OpenShift
 
 # **Red Hat OpenShift Container Platform 기능**
 
-![Figure 1.40: RHOCP cluster components](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%201.png)
-
+![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%202.png)
 Figure 1.40: RHOCP cluster components
 
 - Kubernetes 컨테이너 인프라 기반 으로 빌드된 모듈식 구성 요소 및 서비스 집합
@@ -103,20 +102,18 @@ Figure 1.40: RHOCP cluster components
     - 컨테이너화된 애플리케이션 실행에 최적화된 운영 체제.
     - 단일 이미지로 전체 운영 체제 업데이트.
         
-        ![Figure 1.41: Additional features available in RHOCP](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%202.png)
-        
+      ![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%203.png)
         Figure 1.41: Additional features available in RHOCP
         
 
 # **Kubernetes Architectural Concepts**
 
-![Untitled](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%203.png)
-
+![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%204.png)
 - Cluster: 애플리케이션 컨테이너를 실행하기 위한 일련의 노드 머신이다.
     - 쿠버네티스를 실행 중이라면 클러스터를 실행하고 있는 것입니다.
     - 최소 수준에서 클러스터는 컨트롤 플레인 및 하나 이상의 컴퓨팅 머신 또는 노드를 포함하고 있다.
         
-        ![Untitled](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%204.png)
+       ![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%205.png)
         
 
 - nodes(서버): 애플리케이션의 복원력과 확장성을 제공하는 클러스터에 인프라 리소스를 제공하는 물리적 또는 가상 시스템.
@@ -132,7 +129,7 @@ oc get nodes # 노드 상태 확인
     - **kubelet 서비스**: 클러스터 노드에 대한 컨트롤 플레인 통신을 관리.
     - 서버는 컨트롤 플레인 노드와 Compute 노드의 역할을 모두 수행할 수 있지만, 일반적으로 안정성, 보안, 관리 효율성 향상을 위하여 두 역할을 분리합니다.
         
-        ![Figure 1.42: Kubernetes communication components](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%205.png)
+       ![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%206.png)
         
         Figure 1.42: Kubernetes communication components
         
@@ -168,7 +165,7 @@ oc get nodes # 노드 상태 확인
     
 - **컨트롤 플레인 노드 구성요소**
     
-    ![Untitled](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%206.png)
+    ![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%207.png)
     
     - **etcd 서비스**:
         - etcd는 분산 데이터 저장 시스템으로, Kubernetes의 모든 클러스터 데이터를 저장합니다.
@@ -200,7 +197,7 @@ oc get nodes # 노드 상태 확인
 
 - **컴퓨팅 플레인 노드 구성 요소**
     
-    ![Untitled](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%207.png)
+   ![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%208.png)
     
     - **kubelet**: 각 노드에서 실행되는 에이전트. 컨트롤 플레인에서 전송된 지시 사항에 따라 컨테이너를 시작, 중지 또는 재시작하는 등의 작업을 수행합니다.
         - 기능: 이는 주로 Pod의 생명주기를 관리하며, 컨테이너 런타임과 통신하여 컨테이너의 생성, 삭제 및 검사 작업을 수행합니다.
@@ -231,7 +228,7 @@ oc get nodes # 노드 상태 확인
         oc describe node master01 | grep -A 5 "System Info:"
         ```
         
-        ![Untitled](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%208.png)
+       ![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%208.png)
         
     - 참고: **Namespaces, API Resources, Controllers, Reconciliation Loop**
         - **Namespaces:**  Kubernetes 클러스터 내에서 리소스들을 분리하고 구성하는 데 사용되는 가상의 공간입니다. 다수의 사용자나 팀이 동일한 클러스터를 공유할 때, 서로 겹치지 않게 리소스를 관리할 수 있게 해줍니다.
@@ -298,7 +295,7 @@ oc get nodes # 노드 상태 확인
 
 ## Cluster
 
-![**{rh-virtualization}에 빠르게 클러스터 설치.** [1장. RHV에 설치 OpenShift Container Platform 4.6 | Red Hat Customer Portal](https://access.redhat.com/documentation/ko-kr/openshift_container_platform/4.6/html/installing_on_rhv/_installing-on-rhv)](1-7%20Kubernetes%20%E1%84%86%E1%85%B5%E1%86%BE%20OpenShift%20%E1%84%8B%E1%85%A1%E1%84%8F%E1%85%B5%E1%84%90%E1%85%A6%E1%86%A8%E1%84%8E%E1%85%A5%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%209.png)
+![Alt text](1-7%20Kubernetes%20%EB%B0%8F%20OpenShift%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98%20546dd75cb9fb4d0a8a601acb655c2dbd/Untitled%209.png)
 
 **{rh-virtualization}에 빠르게 클러스터 설치.** [1장. RHV에 설치 OpenShift Container Platform 4.6 | Red Hat Customer Portal](https://access.redhat.com/documentation/ko-kr/openshift_container_platform/4.6/html/installing_on_rhv/_installing-on-rhv)
 
