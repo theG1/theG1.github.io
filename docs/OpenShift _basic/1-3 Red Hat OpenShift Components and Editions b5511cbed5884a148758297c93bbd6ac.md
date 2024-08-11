@@ -1,8 +1,8 @@
 ---
 layout: default
 title: 1-1. Red Hat OpenShift Components and Editions
-nav_order: 2
-parent: 1. Introduction to Kubernetes and OpenShift
+nav_order: 3
+parent: Redhat OpenShift
 ---
 
 # 1-1 Red Hat OpenShift Components and Editions

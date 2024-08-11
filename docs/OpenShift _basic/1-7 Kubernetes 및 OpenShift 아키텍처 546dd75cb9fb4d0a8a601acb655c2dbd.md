@@ -1,8 +1,8 @@
 ---
 layout: default
 title: 1-3. Kubernetes 및 OpenShift 아키텍처
-nav_order: 2
-parent: 1. Introduction to Kubernetes and OpenShift
+nav_order: 5
+parent: Redhat OpenShift
 ---
 # 1-3 Kubernetes 및 OpenShift 아키텍처
 
