@@ -1,7 +1,13 @@
-# 2-5 OpenShift 클러스터의 상태 평가 (with Operator)
+---
+layout: default
+title: 2-2 OpenShift 클러스터의 상태 평가 (with Operator)
+nav_order: 9
+parent: Redhat OpenShift
+has_children: true
+---
 
-![Untitled](2-5%20OpenShift%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%89%E1%85%B3%E1%84%90%E1%85%A5%E1%84%8B%E1%85%B4%20%E1%84%89%E1%85%A1%E1%86%BC%E1%84%90%E1%85%A2%20%E1%84%91%E1%85%A7%E1%86%BC%E1%84%80%E1%85%A1%20(with%20Operat%20e5dda7223b144ead84270ece35a568ae/Untitled.png)
-
+# 2-2 OpenShift 클러스터의 상태 평가 (with Operator)
+![alt text](Untitled.png)
 [https://www.cncf.io/blog/2022/06/15/kubernetes-operators-what-are-they-some-examples/](https://www.cncf.io/blog/2022/06/15/kubernetes-operators-what-are-they-some-examples/)
 
 ### **Operator란?**
@@ -120,8 +126,7 @@ oc get pod -n openshift-dns-operator dns-operator-<number> -o json | jq .status
 
 - OLM은 쿠버네티스 및 OpenShift 클러스터에서 Operator의 설치, 업그레이드 및 관리를 담당
 - Operator의 전체 라이프사이클을 관리하는 툴로 사용된다.
-    
-    ![Untitled](2-5%20OpenShift%20%E1%84%8F%E1%85%B3%E1%86%AF%E1%84%85%E1%85%A5%E1%84%89%E1%85%B3%E1%84%90%E1%85%A5%E1%84%8B%E1%85%B4%20%E1%84%89%E1%85%A1%E1%86%BC%E1%84%90%E1%85%A2%20%E1%84%91%E1%85%A7%E1%86%BC%E1%84%80%E1%85%A1%20(with%20Operat%20e5dda7223b144ead84270ece35a568ae/Untitled%201.png)
+    ![alt text](<Untitled 1.png>)
     
 
 ### 특징

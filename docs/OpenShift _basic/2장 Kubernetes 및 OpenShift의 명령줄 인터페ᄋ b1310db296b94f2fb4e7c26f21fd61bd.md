@@ -1,3 +1,11 @@
+---
+layout: default
+title: 2. Kubernetes 및 OpenShift의 명령줄 인터페이스 및 API
+nav_order: 7
+parent: Redhat OpenShift
+has_children: true
+---
+
 # 2장. Kubernetes 및 OpenShift의 명령줄 인터페이스 및 API
 
 | 목적 | 명령줄을 사용하여 OpenShift 클러스터에 액세스하고 해당 Kubernetes API 리소스를 쿼리하여 클러스터의 상태를 평가합니다. |

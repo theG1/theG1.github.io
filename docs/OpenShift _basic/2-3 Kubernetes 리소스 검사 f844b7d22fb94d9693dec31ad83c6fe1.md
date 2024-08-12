@@ -1,4 +1,12 @@
-# 2-3 Kubernetes 리소스 검사
+---
+layout: default
+title: 2-1. Kubernetes 리소스 검사
+nav_order: 8
+parent: Redhat OpenShift
+has_children: true
+---
+
+# 2-1 Kubernetes 리소스 검사
 
 # **OpenShift 리소스 유형**
 
