@@ -167,9 +167,7 @@ parent: 1. Introduction to Kubernetes and OpenShift
 | 특징 | Kubernetes | OpenShift 4 |
 | --- | --- | --- |
 | 설치 및 배포 | 거의 모든 플랫폼에 설치 가능 | Red Hat Enterprise Linux Atomic Host (RHELAH), Fedora, or CentOS에 종속적 |
-| 보안 | 기본 인증/인가 기능이 없으며 개발자가 직접 설정해야 함
-- 기본적인 RBAC | 더욱 엄격한 보안 정책과 내장된 보안 옵션 제공
-- RBAC와 SELinux 사용 |
+| 보안 | 기본 인증/인가 기능이 없으며 개발자가 직접 설정해야 함 (기본적인 RBAC) | 더욱 엄격한 보안 정책과 내장된 보안 옵션 제공 (RBAC와 SELinux 사용) |
 | 지원 | 큰 개발자 커뮤니티를 갖추고 있음 | Red Hat 개발자를 중심으로 한 상대적으로 작은 지원 커뮤니티 |
 | 네트워킹 | 기본 네트워킹 솔루션 없음, 서드파티 네트워크 플러그인 사용 가능 | 내장된 네트워킹 솔루션 Open vSwitch를 제공 |
 | 템플릿 | Helm 템플릿 제공 | Helm 템플릿 제공 |
