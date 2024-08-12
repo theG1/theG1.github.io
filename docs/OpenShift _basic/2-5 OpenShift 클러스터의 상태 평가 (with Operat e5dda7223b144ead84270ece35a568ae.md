@@ -2,8 +2,8 @@
 layout: default
 title: 2-2 OpenShift 클러스터의 상태 평가 (with Operator)
 nav_order: 9
-parent: Redhat OpenShift
-has_children: true
+parent: 2. Kubernetes 및 OpenShift의 명령줄 인터페이스 및 API
+grand_parent: Redhat OpenShift
 ---
 
 # 2-2 OpenShift 클러스터의 상태 평가 (with Operator)

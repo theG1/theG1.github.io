@@ -2,8 +2,8 @@
 layout: default
 title: 6-4 Application Autoscaling (1)
 nav_order: 24
-parent: Redhat OpenShift
-has_children: true
+parent: 6 안정성을 위한 애플리케이션 구성
+grand_parent: Redhat OpenShift
 ---
 
 # 6-4 Application Autoscaling (1)

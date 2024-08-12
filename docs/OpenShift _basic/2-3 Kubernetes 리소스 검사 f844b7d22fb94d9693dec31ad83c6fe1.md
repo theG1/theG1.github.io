@@ -2,8 +2,9 @@
 layout: default
 title: 2-1. Kubernetes 리소스 검사
 nav_order: 8
-parent: Redhat OpenShift
-has_children: true
+grand_parent: Redhat OpenShift
+parent: 2. Kubernetes 및 OpenShift의 명령줄 인터페이스 및 API
+
 ---
 
 # 2-1 Kubernetes 리소스 검사

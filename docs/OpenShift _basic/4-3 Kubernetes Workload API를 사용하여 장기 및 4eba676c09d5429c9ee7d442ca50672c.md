@@ -2,8 +2,8 @@
 layout: default
 title: 4-1 Kubernetes Workload API를 사용하여 장기 및 단기 애플리케이션 관리
 nav_order: 14
-parent: Redhat OpenShift
-has_children: true
+parent: 4 Kubernetes에 관리형 및 네트워크화된 애플리케이션 배포
+grand_parent: Redhat OpenShift
 ---
 
 # 4-1 Kubernetes Workload API를 사용하여 장기 및 단기 애플리케이션 관리

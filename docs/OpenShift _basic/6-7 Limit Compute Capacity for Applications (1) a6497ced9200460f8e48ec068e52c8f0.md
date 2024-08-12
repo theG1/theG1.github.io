@@ -2,8 +2,8 @@
 layout: default
 title: 6-3 Limit Compute Capacity for Applications (1)
 nav_order: 23
-parent: Redhat OpenShift
-has_children: true
+parent: 6 안정성을 위한 애플리케이션 구성
+grand_parent: Redhat OpenShift
 ---
 
 

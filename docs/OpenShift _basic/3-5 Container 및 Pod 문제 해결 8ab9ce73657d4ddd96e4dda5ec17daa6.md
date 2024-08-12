@@ -2,8 +2,8 @@
 layout: default
 title: 3-2 Container 및 Pod 문제 해결
 nav_order: 12
-parent: Redhat OpenShift
-has_children: true
+parent: 3 애플리케이션을 컨테이너 및 포드로 실행
+grand_parent: Redhat OpenShift
 ---
 
 # 3-2 Container 및 Pod 문제 해결
