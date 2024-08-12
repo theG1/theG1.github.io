@@ -1,3 +1,11 @@
+---
+layout: default
+title: 4 Kubernetes에 관리형 및 네트워크화된 애플리케이션 배포
+nav_order: 13
+parent: Redhat OpenShift
+has_children: true
+---
+
 # 4장. Kubernetes에 관리형 및 네트워크화된 애플리케이션 배포
 
 | 목적 | 애플리케이션을 배포하고 Kubernetes 클러스터 내부 및 외부의 네트워크 액세스에 노출합니다. |

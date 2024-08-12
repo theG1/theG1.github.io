@@ -1,4 +1,12 @@
-# 4-3 Kubernetes Workload API를 사용하여 장기 및 단기 애플리케이션 관리
+---
+layout: default
+title: 4-1 Kubernetes Workload API를 사용하여 장기 및 단기 애플리케이션 관리
+nav_order: 14
+parent: Redhat OpenShift
+has_children: true
+---
+
+# 4-1 Kubernetes Workload API를 사용하여 장기 및 단기 애플리케이션 관리
 
 # **Kubernetes Workload Resources**
 
@@ -25,9 +33,7 @@
         - 실패한 작업을 재시도 할 수 있다
         - 병렬 작업 처리를 위한 설정이 가능하다
     
-
-![[⎈ A Hands-On Guide to Kubernetes: Deployments, StatefulSets, and DaemonSets 🛠️ | by Anvesh Muppeda | Jun, 2024 | Medium](https://medium.com/@muppedaanvesh/a-hands-on-guide-to-kubernetes-deployments-statefulsets-and-daemonsets-%EF%B8%8F-20167634775d)](4-3%20Kubernetes%20Workload%20API%E1%84%85%E1%85%B3%E1%86%AF%20%E1%84%89%E1%85%A1%E1%84%8B%E1%85%AD%E1%86%BC%E1%84%92%E1%85%A1%E1%84%8B%E1%85%A7%20%E1%84%8C%E1%85%A1%E1%86%BC%E1%84%80%E1%85%B5%20%E1%84%86%E1%85%B5%E1%86%BE%204eba676c09d5429c9ee7d442ca50672c/Untitled.png)
-
+![alt text](Untitled-4.png)
 [⎈ A Hands-On Guide to Kubernetes: Deployments, StatefulSets, and DaemonSets 🛠️ | by Anvesh Muppeda | Jun, 2024 | Medium](https://medium.com/@muppedaanvesh/a-hands-on-guide-to-kubernetes-deployments-statefulsets-and-daemonsets-%EF%B8%8F-20167634775d)
 
 - **Deployment(및 ReplicaSet)**
