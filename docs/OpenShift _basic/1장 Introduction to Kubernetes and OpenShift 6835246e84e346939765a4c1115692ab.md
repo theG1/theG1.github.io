@@ -10,7 +10,7 @@ has_children: true
 
 # 전통적인 애플리케이션 배포
 
-![Untitled](1%E1%84%8C%E1%85%A1%E1%86%BC%20Introduction%20to%20Kubernetes%20and%20OpenShift%206835246e84e346939765a4c1115692ab/Untitled.png)
+![alt text](Untitled-11.png)
 
 ## 배포 단계
 
@@ -89,8 +89,7 @@ has_children: true
 - **배포판**: OpenShift와 같은 배포판을 통해 추가 도구와 기능 제공
 
 ## Kubernetes 아키텍처
-
-![[https://www.kubecost.com/kubernetes-multi-cloud/kubernetes-multi-cluster/](https://www.kubecost.com/kubernetes-multi-cloud/kubernetes-multi-cluster/)](1%E1%84%8C%E1%85%A1%E1%86%BC%20Introduction%20to%20Kubernetes%20and%20OpenShift%206835246e84e346939765a4c1115692ab/Untitled%201.png)
+![alt text](image.png)
 
 [https://www.kubecost.com/kubernetes-multi-cloud/kubernetes-multi-cluster/](https://www.kubecost.com/kubernetes-multi-cloud/kubernetes-multi-cluster/)
 
@@ -114,9 +113,7 @@ has_children: true
     - 컨테이너 이미지를 변경하지 않고 민감한 정보 및 구성 설정 관리
 
 # OpenShift 개요
-
-![Untitled](1%E1%84%8C%E1%85%A1%E1%86%BC%20Introduction%20to%20Kubernetes%20and%20OpenShift%206835246e84e346939765a4c1115692ab/Untitled%202.png)
-
+![alt text](<Untitled 2-3.png>)
 ## OpenShift API
 
 - **인터페이스**: 웹 콘솔 또는 명령줄 도구를 통해 OpenShift API 사용
