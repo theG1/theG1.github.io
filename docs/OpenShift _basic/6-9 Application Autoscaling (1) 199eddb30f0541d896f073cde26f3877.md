@@ -1,4 +1,12 @@
-# 6-9 Application Autoscaling (1)
+---
+layout: default
+title: 6-4 Application Autoscaling (1)
+nav_order: 24
+parent: Redhat OpenShift
+has_children: true
+---
+
+# 6-4 Application Autoscaling (1)
 
 ## 목표
 

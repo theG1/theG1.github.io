@@ -1,4 +1,13 @@
-# 6-7 Limit Compute Capacity for Applications (1)
+---
+layout: default
+title: 6-3 Limit Compute Capacity for Applications (1)
+nav_order: 23
+parent: Redhat OpenShift
+has_children: true
+---
+
+
+# 6-3 Limit Compute Capacity for Applications (1)
 
 # OpenShift에서 애플리케이션을 위한 컴퓨팅 용량 제한
 
