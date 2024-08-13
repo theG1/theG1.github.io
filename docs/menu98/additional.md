@@ -33,13 +33,17 @@ plugins=(git zsh-syntax-highlighting zsh-autosuggestions)
 ```
 
 OpenShift 로그인 자동화
-로그인 작업을 al, dl로 단순화 가능
+로그인 작업을 al, dl로 단순화 가능</br>
+
 운영자
+
 ```bssh
 # admin login 설정
 echo "alias al='oc login -u admin -p redhatocp https://api.ocp4.example.com:6443'" >> ~/.zshrc
 ```
+
 개발자
+`
 ```bash
 # developer login 설정
 echo "alias dl='oc login -u developer -p developer https://api.ocp4.example.com:6443'" >> ~/.zshrc
