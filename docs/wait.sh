@@ -1,10 +1,14 @@
 #!/bin/sh
 
 # Configuration
+# 구성이 완결하지 않으면 3번까지 다시 진행함.
 RETRY=3
 
 # Set KUBECONFIG
+# KUBECONFIG 환경 변수를 설정하여 클러스터와의 통신을 위한 인증정보를 실행
 export KUBECONFIG=/home/lab/ocp4/auth/kubeconfig
+
+# 클러스터 시작 대기
 echo "Waiting for OpenShift cluster start..."
 
 for i in $(seq 1 ${RETRY})
