@@ -2,7 +2,7 @@
 layout: default
 title: shell script basic
 has_children: true
-nav_order: 5
+nav_order:98
 ---
 
 # Shell script
