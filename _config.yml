@@ -67,7 +67,3 @@ callouts:
 
 # Footer content
 footer_content: "Copyright &copy; 2025 theG. Cloud Solutions Architect."
-
-# Custom CSS
-aux_css:
-  - "/assets/css/custom.scss"
