@@ -8,9 +8,11 @@ baseurl: "" # 메인 접속경로 (GitHub Pages는 빈 문자열 사용)
 url: "https://theg1.github.io" # 본인 github 주소, e.g. http://example.com
 
 # Aux links for the upper right navigation
-aux_links:  # 본인의 github url로 수정
-  "Just the Docs on GitHub":
+aux_links:
+  "GitHub":
     - "//github.com/theG1/theG1.github.io"
+  "Email":
+    - "mailto:theg@outlook.com"
 
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
@@ -46,4 +48,26 @@ search:
   button: false
 
 # Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
-color_scheme: "nil"
+color_scheme: dark
+
+# Callouts
+callouts:
+  note:
+    title: Note
+    color: blue
+  warning:
+    title: Warning
+    color: red
+  tip:
+    title: Tip
+    color: green
+  important:
+    title: Important
+    color: yellow
+
+# Footer content
+footer_content: "Copyright &copy; 2025 theG. Cloud Solutions Architect."
+
+# Custom CSS
+aux_css:
+  - "/assets/css/custom.scss"
