@@ -7,10 +7,23 @@ permalink: /docs/OpenShift_basic
 ---
 
 # DO180
-
-[https://url.kr/twnoh4](https://url.kr/twnoh4)
-
-[강의 OT](DO180%20161932529a7c4343a44ed4516a089f5d/%E1%84%80%E1%85%A1%E1%86%BC%E1%84%8B%E1%85%B4%20OT%20b4796d40aec447209aae94abe056f974.md)
-
-
 {: .no_toc }
+
+Red Hat OpenShift 공식 교육 과정 (DO180) 학습 내용
+{: .fs-6 .fw-300 }
+
+[강의 링크](https://url.kr/twnoh4){: .btn .btn-primary .fs-5 .mb-4 .mb-md-0 .mr-2 }
+
+---
+
+## 목차
+{: .no_toc .text-delta }
+
+1. TOC
+{:toc}
+
+---
+
+## 강의 소개
+
+[강의 OT 보기](course-orientation)

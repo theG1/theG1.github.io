@@ -1,0 +1,385 @@
+---
+layout: default
+title: 7-3. 애플리케이션 이미지 및 설정 업데이트
+nav_order: 51
+parent: Redhat OpenShift
+---
+
+# 7-3 애플리케이션 이미지 및 설정 업데이트 (1)
+
+# 애플리케이션 코드, 구성, 및 데이터
+
+- 애플리케이션 배포 시나리오
+    - 개발자가 이미지를 생성하고 애플리케이션 배포를 생성.
+        - 이미지 스트림이 이미지를 가리킴.
+        - 배포는 팟을 생성하고 팟의 모든 속성을 정의.
+        - 서비스가 팟을 가리킴.
+- Config와 Data 는 외부에서 로드되어 소스 코드를 변경하지 않고도 다양한 환경에 배포할 수 있게 한다
+- OpenShift는 구성을 저장하기 위한 리소스를 제공
+    - **Configuration maps**: 비민감 환경 변수와 파일을 저장.
+    - **Secrets**: 사용자 이름, 비밀번호, 인증 토큰과 같은 민감한 데이터를 저장.
+    - **Volume resources**: 보존이 필요한 데이터를 저장.
+    - 이러한 리소스를 사용하면 이미지 변경 없이 애플리케이션의 동작을 동적으로 변경 가능.
+- 애플리케이션 코드는 컨테이너 이미지로 제공된다.
+
+# CI/CD
+
+[GitOps | GitOps is Continuous Deployment for cloud native applications](https://www.gitops.tech/#push-based-vs-pull-based-deployments)
+
+[GitOps and Kubernetes: CI/CD for Cloud Native applications (sparkfabrik.com)](https://blog.sparkfabrik.com/en/gitops-and-kubernetes)
+
+## Push-Based Deployments
+
+![[*GitOps, Push-Based Deployments*](https://www.gitops.tech/#push-based-deployments)](7-3%20%E1%84%8B%E1%85%A2%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%84%8F%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB%20%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5%20%E1%84%86%E1%85%B5%E1%86%BE%20%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%20%E1%84%8B%E1%85%A5%E1%86%B8%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%20(1)%2090b477ffc21c46cd9fb295bbfcaa9477/Untitled.png)
+
+[*GitOps, Push-Based Deployments*](https://www.gitops.tech/#push-based-deployments)
+
+1. **배포 과정**:
+    - **코드 업데이트**: 개발자가 코드 변경을 Git 리포지토리에 푸시
+    - **CI 파이프라인 트리거**: CI/CD 도구(예: Jenkins, CircleCI)가 코드 변경을 감지하여 빌드 및 테스트를 수행
+    - **이미지 빌드 및 푸시**: CI/CD 도구가 컨테이너 이미지를 빌드하여 Docker Registry에 푸시
+    - **배포 파이프라인 트리거**: 환경 구성 리포지토리에 YAML 파일을 업데이트하고, CI/CD 도구가 이를 감지하여 Kubernetes 클러스터에 배포
+2. **특징**:
+    - CI/CD 도구가 Kubernetes 클러스터에 직접 접근하여 배포를 수행합니다.
+    - 외부 도구에 배포 자격 증명을 제공해야 하므로 보안 위험이 존재합니다.
+    - 환경 상태와 원하는 상태 간의 불일치를 감지하고 수정하기 위한 추가 모니터링 도구가 필요합니다.
+
+## Pull-Based Deployments
+
+![[*GitOps, Pull-Based Deployments*](https://www.gitops.tech/#pull-based-deployments)](7-3%20%E1%84%8B%E1%85%A2%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%84%8F%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB%20%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5%20%E1%84%86%E1%85%B5%E1%86%BE%20%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%20%E1%84%8B%E1%85%A5%E1%86%B8%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%20(1)%2090b477ffc21c46cd9fb295bbfcaa9477/Untitled%201.png)
+
+[*GitOps, Pull-Based Deployments*](https://www.gitops.tech/#pull-based-deployments)
+
+1. **배포 과정**:
+    - **코드 업데이트**: 개발자가 코드 변경을 Git 리포지토리에 푸시합니다.
+    - **CI 파이프라인 트리거**: CI 도구가 코드 변경을 감지하여 빌드 및 테스트를 수행합니다.
+    - **이미지 빌드 및 푸시**: CI 도구가 컨테이너 이미지를 빌드하여 Docker Registry에 푸시합니다.
+    - **환경 구성 리포지토리 업데이트**: YAML 파일이 포함된 환경 구성 리포지토리를 업데이트합니다.
+    - **Operator 동작**: Kubernetes operator가 환경 구성 리포지토리의 변경 사항을 감지하고, 클러스터의 실제 상태를 원하는 상태로 자동으로 조정합니다.
+2. **특징**:
+    - Operator가 클러스터 내부에서 동작하며, 외부 도구에 배포 자격 증명을 제공할 필요가 없습니다.
+    - Operator는 클러스터의 상태를 지속적으로 모니터링하여 불일치를 자동으로 수정합니다.
+    - 모든 배포 작업이 클러스터 내부에서 이루어져 보안이 강화됩니다.
+    - **Pull 기반 배포**에서는 Kubernetes operator가 주요 역할을 하며, 배포를 자동화하고 클러스터의 상태를 지속적으로 모니터링한다
+
+### **Push vs Pull**
+
+- **Push 기반 배포**는 CI/CD 도구가 배포를 직접 수행하며, 보안 위험과 모니터링의 어려움이 있습니다.
+- **Pull 기반 배포**는 Kubernetes operator가 배포와 상태 관리를 자동화하여 보안과 상태 일관성을 유지합니다
+
+# 배포 전략
+
+기능적 애플리케이션 변경 사항 또는 새 버전을 사용자에게 배포하는 것은 개발 프로세스에 가치를 추가하는 CI/CD 파이프라인의 중요한 단계입니다.
+
+- 애플리케이션에 변경 사항을 적용하는 과정에서 발생하는 문제
+    - 배포 중 다운타임 발생
+    - 버그 발생
+    - 애플리케이션 성능 저하
+- 다운타임의 영향
+    - 애플리케이션 또는 서비스 다운타임이 발생하면 다음과 같은 문제가 발생할 수 있습니다:
+    - 비즈니스 손실
+    - 해당 애플리케이션 또는 서비스를 사용하는 기타 서비스 중단
+    - 서비스 수준 계약(SLA) 위반
+    
+
+## **RollingUpdate 전략**
+
+- 애플리케이션 버전을 단계적으로 업데이트합니다.
+- 두 버전이 동시에 실행되며 새 인스턴스가 준비되면 이전 인스턴스를 축소합니다.
+- 버전 간 호환이 필요합니다.
+- 무중단 지속 배포를 지원합니다.
+
+![Untitled](7-3%20%E1%84%8B%E1%85%A2%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%84%8F%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB%20%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5%20%E1%84%86%E1%85%B5%E1%86%BE%20%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%20%E1%84%8B%E1%85%A5%E1%86%B8%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%20(1)%2090b477ffc21c46cd9fb295bbfcaa9477/Untitled%202.png)
+
+1. 일부 애플리케이션 인스턴스는 업데이트가 필요한 코드 버전(v1)을 실행합니다. 
+    - OpenShift는 업데이트된 애플리케이션 버전(v2)을 사용하여 새 인스턴스를 확장합니다.
+    - 버전이 v2인 새 인스턴스가 준비되지 않았으므로 버전 v1 인스턴스가 고객 요청을 이행하는 유일한 인스턴스입니다.
+2. 버전이 v2인 인스턴스가 준비되었으며 고객 요청을 수락합니다. 
+    - OpenShift는 버전 v1을 사용하여 인스턴스를 축소하고 버전 v2를 사용하여 새 인스턴스를 확장합니다
+    - 두 버전의 애플리케이션 모두 고객 요청을 이행합니다.
+3. 버전이 v2인 새 인스턴스가 준비되었으며 고객 요청을 수락합니다. 
+    - OpenShift는 버전 v1을 사용하여 나머지 인스턴스를 축소합니다.
+4. 교체할 인스턴스가 남아 있지 않습니다. 애플리케이션 업데이트가 **다운타임 없이 완료**되었습니다.
+
+- 파라미터:
+    - `maxSurge`: 정상적인 복제본 수를 초과하여 생성할 수 있는 팟 수.
+    - `maxUnavailable`: 정상적인 복제본 수 아래로 제거할 수 있는 팟 수.
+- 예:
+    
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+    ...output 생략...
+    spec:
+      progressDeadlineSeconds: 600
+      replicas: 10
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          app: myapp2
+      strategy:
+        rollingUpdate:
+          maxSurge: 25%
+          maxUnavailable: 50%
+        type: RollingUpdate
+      template:
+    ...output 생략...
+    
+    ```
+    
+
+## **Recreate 전략**
+
+- 모든 애플리케이션 인스턴스를 종료한 후 새 인스턴스로 교체합니다.
+- 전환 중 요청을 처리할 인스턴스가 없어 다운타임이 발생합니다.
+- 동시에 다른 버전을 실행할 수 없는 애플리케이션에 적합합니다.
+
+![Untitled](7-3%20%E1%84%8B%E1%85%A2%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%84%8F%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB%20%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5%20%E1%84%86%E1%85%B5%E1%86%BE%20%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%20%E1%84%8B%E1%85%A5%E1%86%B8%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%20(1)%2090b477ffc21c46cd9fb295bbfcaa9477/Untitled%203.png)
+
+1. 애플리케이션에는 업데이트가 필요한 코드 버전(v1)을 실행하는 일부 인스턴스가 있습니다.
+2. OpenShift는 실행 중인 인스턴스를 0으로 축소합니다. 
+    - 이 작업을 수행하면 요청을 이행할 인스턴스가 없으므로 **애플리케이션 다운타임이 발생**합니다.
+3. OpenShift는 새 버전의 애플리케이션(v2)을 사용하여 새 인스턴스를 확장합니다. 
+    - 새 인스턴스가 부팅 중이기 때문에 다운타임이 계속됩니다.
+4. 새 인스턴스는 부팅을 완료하고 요청을 이행할 준비를 마칩니다. 
+    - 이 단계는 `Recreate` 전략의 마지막 단계로 애플리케이션의 중단 문제를 해결합니다.
+
+- 예:
+    
+    ```yaml
+    apiVersion: apps/v1
+    kind: Deployment
+    metadata:
+    ...output 생략...
+    spec:
+      progressDeadlineSeconds: 600
+      replicas: 10
+      revisionHistoryLimit: 10
+      selector:
+        matchLabels:
+          app: myapp2
+      strategy:
+        type: Recreate
+      template:
+    ...output 생략...
+    
+    ```
+    
+
+## 애플리케이션 롤아웃
+
+- OpenShift는 Deployment 객체가 업데이트될 때 자동으로 애플리케이션을 롤아웃합니다.
+    - 여러 번의 변경 중 여러 번의 배포를 방지하려면:
+        1. **롤아웃 일시 중지**:
+        
+        ```bash
+        oc rollout pause deployment/myapp
+        
+        ```
+        
+        1. **모든 수정 적용**:
+        
+        ```bash
+        oc set image deployment/myapp nginx-120=registry.access.redhat.com/ubi9/nginx-120:1-86
+        oc set env deployment/myapp NGINX_LOG_TO_VOLUME=1
+        oc set probe deployment/myapp --readiness --get-url http://:8080
+        
+        ```
+        
+        1. **롤아웃 재개**:
+        
+        ```bash
+        oc rollout resume deployment/myapp
+        
+        ```
+        
+- 새 배포 생성 및 구성:
+    1. **0개의 복제본으로 배포 생성**:
+        
+        ```bash
+        oc create deployment myapp2 --image registry.access.redhat.com/ubi9/nginx-120:1-86 --replicas 0
+        
+        ```
+        
+    2. **구성 적용**:
+        
+        ```bash
+        oc set probe deployment/myapp2 --readiness --get-url http://:8080
+        
+        ```
+        
+    3. **배포 확장**:
+        
+        ```bash
+        oc scale deployment/myapp2 --replicas 10
+        
+        ```
+        
+
+## Replica Sets 모니터링
+
+![Untitled](7-3%20%E1%84%8B%E1%85%A2%E1%84%91%E1%85%B3%E1%86%AF%E1%84%85%E1%85%B5%E1%84%8F%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%89%E1%85%A7%E1%86%AB%20%E1%84%8B%E1%85%B5%E1%84%86%E1%85%B5%E1%84%8C%E1%85%B5%20%E1%84%86%E1%85%B5%E1%86%BE%20%E1%84%89%E1%85%A5%E1%86%AF%E1%84%8C%E1%85%A5%E1%86%BC%20%E1%84%8B%E1%85%A5%E1%86%B8%E1%84%83%E1%85%A6%E1%84%8B%E1%85%B5%E1%84%90%E1%85%B3%20(1)%2090b477ffc21c46cd9fb295bbfcaa9477/Untitled%204.png)
+
+- OpenShift는 애플리케이션 롤아웃 중 ReplicaSet 객체를 생성합니다.
+    - 팟을 생성하고 모니터링하는 역할을 합니다.
+    - 롤링 업데이트 동안 여러 ReplicaSet 객체가 동시에 존재할 수 있습니다.
+    - `oc get replicaset` 명령어를 사용하여 ReplicaSet 객체를 나열할 수 있습니다.
+    - 예:
+        
+        ```bash
+        oc get replicaset
+        ```
+        
+
+## 롤아웃 관리
+
+- 새 버전이 올바르게 작동하지 않으면 이전 배포 버전으로 롤백할 수 있습니다.
+    - **롤아웃 취소**:
+        
+        ```bash
+        oc rollout undo deployment/myapp2
+        
+        ```
+        
+    - **롤아웃 상태 모니터링**:
+        
+        ```bash
+        oc rollout status deployment/myapp2
+        
+        ```
+        
+    - **롤아웃 기록 보기**:
+        
+        ```bash
+        oc rollout history deployment/myapp2
+        
+        ```
+        
+    - **배포 변경 사항 주석 달기**:
+        
+        ```bash
+        oc annotate deployment/myapp2 kubernetes.io/change-cause="Image updated to 1-86"
+        
+        ```
+        
+    - **특정 리비전으로 롤백**:
+        
+        ```bash
+        oc rollout undo deployment/myapp2 --to-revision 1
+        
+        ```
+        
+
+## 건강 검사
+
+- Readiness 프로브는 새 팟이 트래픽을 받을 준비가 되었는지 확인합니다.
+    - 실패한 프로브는 팟의 엔드포인트를 서비스에서 제거합니다.
+    - 업데이트 중 원활한 트래픽 관리를 위해 readiness 프로브가 구성되었는지 확인합니다.
+
+## 실습 예제
+
+- 애플리케이션을 배포하고 readiness 프로브와 함께 롤링 업데이트 수행:
+    1. **초기 이미지로 배포 생성**:
+        
+        ```bash
+        oc create deployment example-app --image nginx:1.14.2 --replicas 3
+        
+        ```
+        
+    2. **Readiness 프로브 추가**:
+        
+        ```bash
+        oc set probe deployment/example-app --readiness --get-url=http://:80
+        
+        ```
+        
+    3. **이미지 업데이트**:
+        
+        ```bash
+        oc set image deployment/example-app nginx=nginx:1.16.0
+        
+        ```
+        
+    4. **롤아웃 상태 모니터링**:
+        
+        ```bash
+        oc rollout status deployment/example-app
+        
+        ```
+        
+    5. **필요시 이전 버전으로 롤백**:
+        
+        ```bash
+        oc rollout undo deployment/example-app
+        
+        ```
+        
+
+## 추가 명령어 및 예제
+
+- **롤아웃 일시 중지**:
+    
+    ```bash
+    oc rollout pause deployment/myapp
+    
+    ```
+    
+- **이미지 설정**:
+    
+    ```bash
+    oc set image deployment/myapp nginx=nginx:1.16.0
+    
+    ```
+    
+- **환경 변수 설정**:
+    
+    ```bash
+    oc set env deployment/myapp NGINX_LOG_TO_VOLUME=1
+    
+    ```
+    
+- **Readiness 프로브 설정**:
+    
+    ```bash
+    oc set probe deployment/myapp --readiness --get-url=http://:80
+    
+    ```
+    
+- **롤아웃 재개**:
+    
+    ```bash
+    oc rollout resume deployment/myapp
+    
+    ```
+    
+- **롤아웃 취소**:
+    
+    ```bash
+    oc rollout undo deployment/myapp2
+    
+    ```
+    
+- **ReplicaSets 조회**:
+    
+    ```bash
+    oc get replicaset
+    
+    ```
+    
+- **배포 주석 달기**:
+    
+    ```bash
+    oc annotate deployment/myapp2 kubernetes.io/change-cause="Image updated to 1-86"
+    
+    ```
+    
+- **특정 리비전으로 롤백**:
+    
+    ```bash
+    oc rollout undo deployment/myapp2 --to-revision 1
+    
+    ```
+    
+
+이 상세 가이드는 OpenShift에서 애플리케이션 이미지 및 설정을 업데이트하는 방법과 관련된 실습 예제와 명령어를 포함하여 종합적인 이해를 제공합니다.

@@ -1,0 +1,210 @@
+---
+layout: default
+title: 5-7. StatefulSet 스토리지 관리
+nav_order: 37
+parent: Redhat OpenShift
+---
+
+# 5-7 StatefulSet으로 비공유 스토리지 관리
+
+# **스토리지 서비스**
+
+- **파일 스토리지 솔루션**:
+    - 일반적인 환경에서 발견되는 디렉토리 구조를 제공합니다.
+    - 구조화된 데이터의 합리적인 볼륨을 생성하거나 사용하는 애플리케이션에 이상적입니다.
+    - 데이터 백업, 아카이빙, 파일 공유 및 협업 서비스에 적합합니다.
+    - 대부분의 데이터 센터는 NAS 클러스터와 같은 파일 스토리지 솔루션을 제공합니다.
+1. **Network-attached storage (NAS)**:
+    - 파일 기반 스토리지 아키텍처로, 네트워크 장치에 저장된 데이터에 액세스 가능합니다.
+    - 보안, 관리 및 내결함성 기능이 내장된 단일 스토리지 액세스 포인트를 제공합니다.
+    - 사용하는 전송 프로토콜 중 IP와 TCP가 기본적입니다.
+2. **파일 전송 프로토콜**:
+    - **Network File Systems (NFS)**: 네트워크를 통해 원격 호스트가 파일 시스템을 마운트하고 로컬에 마운트된 것처럼 해당 파일 시스템과 상호 작용할 수 있게 합니다.
+    - **Server Message Blocks (SMB)**: 서버의 자원에 액세스하기 위해 사용되는 응용 계층 네트워크 프로토콜을 구현합니다.
+3. **블록 스토리지 솔루션**:
+    - SAN과 iSCSI는 어플리케이션이 블록장치에 직접 접근하여 데이터를 직접적이고 빠르게 다룰 수 있게 해주는 기술
+        - 이 기술들은 데이터 처리가 많고 빠르게 접근해야 하는 앱에 적합합니다.
+4. **SAN 및 iSCSI 기술**:
+    - 네트워크 기반 스토리지 풀에서 블록 수준 볼륨을 애플리케이션에 제공합니다.
+5. **Red Hat OpenShift Container Platform (RHOCP)**:
+    - 애플리케이션을 위한 맞춤형 스토리지 클래스를 생성할 수 있습니다.
+    - RHOCP 애플리케이션은 파일 기반 스토리지를 위한 **NFS 프로토콜** 또는 블록 스토리지를 위한 **블록 수준 프로토콜**을 사용할 수 있습니다.
+
+## 스토리지 유형
+
+![Untitled](5-7%20StatefulSet%E1%84%8B%E1%85%B3%E1%84%85%E1%85%A9%20%E1%84%87%E1%85%B5%E1%84%80%E1%85%A9%E1%86%BC%E1%84%8B%E1%85%B2%20%E1%84%89%E1%85%B3%E1%84%90%E1%85%A9%E1%84%85%E1%85%B5%E1%84%8C%E1%85%B5%20%E1%84%80%E1%85%AA%E1%86%AB%E1%84%85%E1%85%B5%2006f74091e2854a388924ff81ff682c5a/Untitled.png)
+
+- **파일기반 스토리지 (File-based Storage)**
+    - **정의**: 파일을 기반으로 하는 저장 방식.
+    - **특징**:
+        - 계층적 파일시스템 구조 제공.
+        - 제한적인 메타데이터(예: 파일 이름, 위치, 생성일, 수정일 등)를 가지고 있다.
+        - 파일 수정 가능.
+    - **사용 사례**:
+        - 로컬 PC의 하드 드라이브
+        - 공유드라이브
+        - DAS (직접 연결된 스토리지)
+        - NAS (네트워크 연결 스토리지)
+- **블록기반 스토리지 (Block-based Storage)**
+    - **정의**: 데이터를 블록 형식으로 나누어 저장하는 방식.
+    - **특징**:
+        - 데이터를 분산된 블록으로 저장하고, 필요 시 스토리지 소프트웨어를 통해 조합.
+        - 대상을 블록 디바이스로 제공.
+        - 파티션 및 파일 시스템 생성을 통해 사용 가능.
+    - **사용 사례**:
+        - DAS
+        - SAN (스토리지 영역 네트워크)
+        - 클라우드 환경에서의 VM 또는 컨테이너 스토리지
+- **객체기반 스토리지 (Object-based Storage)**
+    - **정의**: 데이터를 객체로 저장하고, 각 객체에 고유한 ID 또는 키를 부여하는 방식.
+    - **특징**:
+        - 어플리케이션 계층에서 동작 (API 제공).
+        - 파일 시스템 또는 블록 스토리지의 일반적인 "마운트" 개념이 없음.
+        - 한번 저장된 데이터는 수정할 수 없음 (불변).
+        - Key-Value 방식을 사용해 데이터 검색.
+    - **사용 사례**:
+        - 클라우드 스토리지
+        - 대규모 데이터 분석
+        - 스트리밍 서비스 (예: 넷플릭스, 유튜브)
+        
+
+# **RHOCP에서 사용할 수 있는 스토리지 솔루션**
+
+1. **블록 스토리지**:
+    - **Red Hat OpenShift Container Storage (OCS)**: Red Hat이 제공하는 소프트웨어 정의 스토리지 솔루션.
+        - Ceph을 기반으로 하며, 블록, 파일 및 오브젝트 스토리지를 지원한다.
+    - **AWS EBS, GCE Persistent Disk, Azure Disk** 등: 주요 클라우드 제공 업체의 블록 스토리지 솔루션
+    - **iSCSI**: 인터넷 SCSI를 사용하여 IP 네트워크를 통해 블록 스토리지에 액세스한다.
+2. **파일 시스템 기반 스토리지**:
+    - **NFS**: 네트워크 파일 시스템으로, 다른 시스템에서 파일을 공유할 수 있다.
+    - **GlusterFS**: 스케일 아웃 네트워크 파일 시스템이다.
+3. **오브젝트 스토리지**:
+    - **Ceph Object Storage**: 오브젝트 스토리지로, S3 호환 API를 제공한다.
+    - **AWS S3, Google Cloud Storage** 등: 주요 클라우드 제공 업체의 오브젝트 스토리지 솔루션
+4. **로컬 스토리지**:
+    - 노드의 로컬 디스크를 사용하며, 임시 데이터나 고성능 워크로드에 적합하다.
+
+### **RHOCP에서 디폴트 스토리지 클래스로 일반적으로 설정되는 것:**
+
+- AWS EBS (AWS 환경)
+- Azure Disk (Azure 환경)
+- GCP Persistent Disk (GCP 환경)
+- Cinder (OpenStack 환경)
+- NFS 또는 GlusterFS (on-premise)
+
+### **RHOCP에서 디폴트 스토리지 클래스로 일반적으로 사용되지 않는 것**
+
+- 오브젝트 스토리지 (예: S3, minio): 오브젝트 스토리지는 특정 유형의 데이터 저장(예: 백업, 미디어 콘텐츠)을 위해 설계되었기 때문에 일반적인 파일 또는 블록 스토리지로 사용되는 워크로드에는 적합하지 않다.
+
+# StatefulSet과 비공유 스토리지 관리
+
+- `StatefulSet`과 `Deployment`는 Kubernetes에서 애플리케이션을 배포하고 관리하기 위한 리소스 유형입니다. 각각은 특정 유형의 워크로드와 요구 사항에 적합하다.
+
+## StatefulSet vs Deployment
+
+## 결론
+
+- **StatefulSet**은 안정적인 저장소와 네트워크 식별자가 필요한 상태가 있는 워크로드에 적합
+- **Deployment**는 상태를 유지하지 않는 워크로드에 더 적합하며, 빠르게 확장 및 축소가 가능
+
+### StatefulSet
+
+1. **용도**:
+    - 상태가 있는 (stateful) 애플리케이션, 예를 들면 데이터베이스, 메시지 큐 등을 실행하기 위해 설계되었습니다.
+2. **식별성**:
+    - StatefulSet의 각 파드는 순차적이고 예측 가능한 이름 (예: web-0, web-1)을 가집니다.
+3. **스케일링**:
+    - 파드는 순차적으로 생성되고 삭제됩니다. 이는 특히 데이터베이스와 같이 순서가 중요한 애플리케이션에서 중요합니다.
+4. **저장소**:
+    - `volumeClaimTemplates`를 사용하여 각 파드에 대한 별도의 Persistent Volume Claim (PVC)을 생성할 수 있습니다. 이로 인해 각 파드는 고유한 스토리지를 가질 수 있습니다.
+5. **DNS**:
+    - 연결된 headless service를 사용하여 각 파드에 대한 고유한 DNS 이름을 제공받습니다.
+6. **용도 사례**:
+    - MySQL, Cassandra, Kafka와 같은 분산 데이터베이스 및 메시지 시스템에 적합합니다.
+
+### Deployment
+
+1. **용도**:
+    - 상태가 없는 (stateless) 애플리케이션을 실행하기 위해 주로 사용
+2. **식별성**:
+    - 파드 이름은 예측할 수 없는 해시 값으로 생성
+3. **스케일링**:
+    - 파드는 순서에 상관없이 동시에 생성 및 삭제될 수 있다
+4. **저장소**:
+    - 모든 파드는 동일한 Persistent Volume (PV)를 공유할 수 있다.
+5. **DNS**:
+    - 일반적으로 각 파드에 대한 고유한 DNS 이름이 없습니다. 대신 서비스를 사용하여 파드 그룹에 액세스가능
+6. **용도 사례**:
+    - 웹 서버, API 게이트웨이, 프론트엔드 애플리케이션 등에 적합.
+
+### StatefulSet 예
+
+[StatefulSet - OpenShift Examples](https://examples.openshift.pub/deploy/statefulset/)
+
+```yaml
+# Service 정의 시작
+apiVersion: v1
+kind: Service
+metadata:
+  name: nginx          # 서비스 이름
+  labels:
+    app: nginx        # 서비스 레이블
+spec:
+  ports:
+  - port: 80          # 서비스 포트
+    name: web
+  clusterIP: None     # 클러스터 IP 없음 (Headless Service를 의미)
+  selector:
+    app: nginx        # 해당 레이블을 가진 파드에 트래픽을 전달
+---
+# StatefulSet 정의 시작
+apiVersion: apps/v1beta1
+kind: StatefulSet
+metadata:
+  name: web           # StatefulSet 이름
+spec:
+  serviceName: "nginx"  # StatefulSet에 연결된 서비스 이름
+  replicas: 2           # 2개의 파드 복제본 생성
+  selector:
+    matchLabels:
+      app: nginx
+  template:             # 파드 템플릿 시작
+    metadata:
+      labels:
+        app: nginx
+    spec:
+      containers:
+      - name: nginx
+        image: gcr.io/google_containers/nginx-slim:0.8  # 사용할 컨테이너 이미지
+        ports:
+        - containerPort: 80   # 컨테이너에서 열려있는 포트
+          name: web
+        volumeMounts:
+        - name: www           # 볼륨 마운트 이름
+          mountPath: /usr/share/nginx/html  # 해당 볼륨이 마운트 될 경로
+
+  # PVC 템플릿 시작. 각 파드 복제본마다 별도의 PVC가 생성됩니다.
+  volumeClaimTemplates:
+  - metadata:
+      name: www
+    spec:
+      accessModes: [ "ReadWriteOnce" ]  # 볼륨 액세스 모드
+      resources:
+        requests:
+          storage: 1Gi  # 요청된 스토리지 크기
+```
+
+- **참고**
+    - 위의 구성에서, **`StatefulSet`**은 웹 서버용으로 설정되어 있다.
+    - 일반적으로 웹 서버는 상태가 없는(stateless) 애플리케이션으로 간주되며, **`Deployment`**를 사용하는 것이 더 일반적이다.
+        - 그러나 이 구성을 살펴보면 웹 서버도 상태를 가질 수 있는 경우들이 있음을 알 수 있다.
+        - 웹 서버가 일부 데이터나 설정을 로컬 파일 시스템에 저장해야 하고, 이 데이터가 다른 복제본 간에 공유되지 않아야 하는 경우에는 StatefulSet을 사용
+    - StatefulSet을 사용하는 이유ㄴ
+        1. **고유한 저장소 요구사항**: 여기서 각 **`nginx`** 파드는 고유한 저장소(**`www`**)에 연결된다.
+            - **`volumeClaimTemplates`**를 통해 각 파드는 고유한 PVC를 가지게 됩니다.
+        2. **예측 가능한 호스트 이름**: StatefulSet을 사용하면 파드는 예측 가능한 호스트 이름(예: **`web-0`**, **`web-1`** 등)을 가지게 된다. 
+            - 이러한 호스트 이름은 일부 웹 응용 프로그램 구성에서 유용할 수 있다.
+        3. **순차적인 롤아웃과 스케일링**: StatefulSet의 파드는 순차적으로 롤아웃 및 스케일 다운된다. 
+            - 이는 일부 웹 애플리케이션에서 요구될 수 있는 특정 시작/종료 순서를 가지게 된다.
+    - 일반적인 상황에서
+        - 대부분의 웹 서버는 상태를 외부 데이터베이스나 캐시에 저장하기 때문에, **`Deployment`**를 사용하여 상태가 없는 웹 서버를 실행하는 것이 더 일반적이다.

@@ -4,7 +4,7 @@ remote_theme: just-the-docs/just-the-docs
 
 title: theG's Cloud  # 사이트 제목
 description: Cloud Solutions Architect # 사이트 설명
-baseurl: "/" # 메인 접속경로 e.g. /blog, or / 
+baseurl: "" # 메인 접속경로 (GitHub Pages는 빈 문자열 사용)
 url: "https://theg1.github.io" # 본인 github 주소, e.g. http://example.com
 
 # Aux links for the upper right navigation
@@ -12,10 +12,6 @@ aux_links:  # 본인의 github url로 수정
   "Just the Docs on GitHub":
     - "//github.com/theG1/theG1.github.io"
 
-# Color scheme currently only supports "dark", "light"/nil (default), or a custom scheme that you define
-color_scheme: dark
-
-    
 # Footer "Edit this page on GitHub" link text
 gh_edit_link: true # show or hide edit this page link
 gh_edit_link_text: "Edit this page on GitHub"  
