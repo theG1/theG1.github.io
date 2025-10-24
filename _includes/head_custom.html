@@ -1,1 +1,254 @@
+<!-- Custom CSS -->
 <link rel="stylesheet" href="{{ '/assets/css/custom.css' | relative_url }}">
+
+<!-- Font Awesome Icons -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+<!-- Google Fonts - JetBrains Mono for code -->
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+<!-- Custom JavaScript for interactive features -->
+<script>
+document.addEventListener('DOMContentLoaded', function() {
+
+  // 1. Scroll Progress Bar
+  const scrollProgress = document.createElement('div');
+  scrollProgress.className = 'scroll-progress';
+  document.body.appendChild(scrollProgress);
+
+  window.addEventListener('scroll', function() {
+    const winScroll = document.body.scrollTop || document.documentElement.scrollTop;
+    const height = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+    const scrolled = (winScroll / height) * 100;
+    scrollProgress.style.width = scrolled + '%';
+  });
+
+  // 2. Copy Code Button for all code blocks
+  document.querySelectorAll('.highlight').forEach(function(codeBlock) {
+    const copyButton = document.createElement('button');
+    copyButton.className = 'copy-code-button';
+    copyButton.textContent = 'Copy';
+    copyButton.setAttribute('aria-label', 'Copy code to clipboard');
+
+    copyButton.addEventListener('click', function() {
+      const code = codeBlock.querySelector('pre code, pre').textContent;
+      navigator.clipboard.writeText(code).then(function() {
+        copyButton.textContent = 'Copied!';
+        copyButton.style.background = '#10b981';
+        setTimeout(function() {
+          copyButton.textContent = 'Copy';
+          copyButton.style.background = '';
+        }, 2000);
+      }).catch(function(err) {
+        console.error('Failed to copy: ', err);
+        copyButton.textContent = 'Failed';
+        setTimeout(function() {
+          copyButton.textContent = 'Copy';
+        }, 2000);
+      });
+    });
+
+    codeBlock.appendChild(copyButton);
+  });
+
+  // 3. Add fade-in animation to main content
+  const mainContent = document.querySelector('.main-content');
+  if (mainContent) {
+    mainContent.classList.add('fade-in');
+  }
+
+  // 4. External link handling - open in new tab
+  document.querySelectorAll('a[href^="http"]').forEach(function(link) {
+    if (!link.hostname.includes(window.location.hostname)) {
+      link.setAttribute('target', '_blank');
+      link.setAttribute('rel', 'noopener noreferrer');
+    }
+  });
+
+  // 5. Add smooth scroll to all anchor links
+  document.querySelectorAll('a[href^="#"]').forEach(function(anchor) {
+    anchor.addEventListener('click', function(e) {
+      const targetId = this.getAttribute('href');
+      if (targetId !== '#' && targetId !== '') {
+        const target = document.querySelector(targetId);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+          // Update URL without triggering page reload
+          history.pushState(null, null, targetId);
+        }
+      }
+    });
+  });
+
+  // 6. Add active class to current navigation item
+  const currentPath = window.location.pathname;
+  document.querySelectorAll('.nav-list-link').forEach(function(link) {
+    if (link.getAttribute('href') === currentPath) {
+      link.classList.add('active');
+    }
+  });
+
+  // 7. Lazy load images (if any)
+  if ('loading' in HTMLImageElement.prototype) {
+    const images = document.querySelectorAll('img[loading="lazy"]');
+    images.forEach(function(img) {
+      img.src = img.dataset.src;
+    });
+  }
+
+  // 8. Add language label to code blocks
+  document.querySelectorAll('.highlight').forEach(function(block) {
+    const codeElement = block.querySelector('code');
+    if (codeElement && codeElement.className) {
+      const match = codeElement.className.match(/language-(\w+)/);
+      if (match) {
+        block.setAttribute('data-lang', match[1].toUpperCase());
+      } else {
+        block.setAttribute('data-lang', 'CODE');
+      }
+    } else {
+      block.setAttribute('data-lang', 'CODE');
+    }
+  });
+
+  // 9. Add hover effect to cards and content elements
+  document.querySelectorAll('.content-card, table').forEach(function(element) {
+    element.classList.add('hover-lift');
+  });
+
+  // 10. Print button functionality
+  const printButton = document.createElement('button');
+  printButton.innerHTML = '<i class="fas fa-print"></i>';
+  printButton.className = 'print-button';
+  printButton.style.cssText = 'position: fixed; bottom: 20px; right: 20px; width: 50px; height: 50px; border-radius: 50%; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; display: flex; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.3s ease;';
+
+  printButton.addEventListener('click', function() {
+    window.print();
+  });
+
+  printButton.addEventListener('mouseenter', function() {
+    this.style.transform = 'scale(1.1)';
+    this.style.boxShadow = '0 6px 20px rgba(0,0,0,0.4)';
+  });
+
+  printButton.addEventListener('mouseleave', function() {
+    this.style.transform = 'scale(1)';
+    this.style.boxShadow = '0 4px 12px rgba(0,0,0,0.3)';
+  });
+
+  // Only show print button on larger screens
+  if (window.innerWidth > 768) {
+    document.body.appendChild(printButton);
+  }
+
+  // 11. Back to top button
+  const backToTopButton = document.createElement('button');
+  backToTopButton.innerHTML = '<i class="fas fa-arrow-up"></i>';
+  backToTopButton.className = 'back-to-top';
+  backToTopButton.setAttribute('aria-label', 'Back to top');
+  backToTopButton.style.cssText = 'position: fixed; bottom: 20px; left: 20px; width: 50px; height: 50px; border-radius: 50%; background: rgba(37, 99, 235, 0.9); color: white; border: none; cursor: pointer; box-shadow: 0 4px 12px rgba(0,0,0,0.3); z-index: 1000; display: none; align-items: center; justify-content: center; font-size: 1.2rem; transition: all 0.3s ease;';
+
+  window.addEventListener('scroll', function() {
+    if (window.pageYOffset > 300) {
+      backToTopButton.style.display = 'flex';
+    } else {
+      backToTopButton.style.display = 'none';
+    }
+  });
+
+  backToTopButton.addEventListener('click', function() {
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  });
+
+  backToTopButton.addEventListener('mouseenter', function() {
+    this.style.transform = 'scale(1.1)';
+    this.style.background = 'rgba(37, 99, 235, 1)';
+  });
+
+  backToTopButton.addEventListener('mouseleave', function() {
+    this.style.transform = 'scale(1)';
+    this.style.background = 'rgba(37, 99, 235, 0.9)';
+  });
+
+  document.body.appendChild(backToTopButton);
+
+  // 12. Add reading time estimator
+  const content = document.querySelector('.main-content');
+  if (content) {
+    const text = content.textContent;
+    const wordCount = text.trim().split(/\s+/).length;
+    const readingTime = Math.ceil(wordCount / 200); // Average reading speed: 200 words/min
+
+    if (readingTime > 1) {
+      const readingTimeElement = document.createElement('div');
+      readingTimeElement.className = 'reading-time';
+      readingTimeElement.innerHTML = '<i class="far fa-clock"></i> ' + readingTime + ' min read';
+      readingTimeElement.style.cssText = 'color: var(--text-secondary); font-size: 0.9rem; margin-bottom: 1rem; display: flex; align-items: center; gap: 0.5rem;';
+
+      const firstHeading = content.querySelector('h1, h2');
+      if (firstHeading && firstHeading.nextSibling) {
+        firstHeading.parentNode.insertBefore(readingTimeElement, firstHeading.nextSibling);
+      }
+    }
+  }
+
+  // 13. Keyboard shortcuts
+  document.addEventListener('keydown', function(e) {
+    // Ctrl/Cmd + K: Focus search
+    if ((e.ctrlKey || e.metaKey) && e.key === 'k') {
+      e.preventDefault();
+      const searchInput = document.querySelector('.search-input');
+      if (searchInput) {
+        searchInput.focus();
+      }
+    }
+
+    // Escape: Close search
+    if (e.key === 'Escape') {
+      const searchInput = document.querySelector('.search-input');
+      if (searchInput && searchInput === document.activeElement) {
+        searchInput.blur();
+      }
+    }
+  });
+
+  // 14. Add tooltips to navigation items
+  document.querySelectorAll('.nav-list-link').forEach(function(link) {
+    link.setAttribute('title', link.textContent.trim());
+  });
+
+  // 15. Performance: Intersection Observer for animations
+  if ('IntersectionObserver' in window) {
+    const observer = new IntersectionObserver(function(entries) {
+      entries.forEach(function(entry) {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('fade-in');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    // Observe all content cards and sections
+    document.querySelectorAll('.content-card, section').forEach(function(element) {
+      observer.observe(element);
+    });
+  }
+
+  console.log('%c🚀 theG\'s Cloud Blog', 'font-size: 20px; font-weight: bold; background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); -webkit-background-clip: text; -webkit-text-fill-color: transparent;');
+  console.log('%cDesigned with ❤️ for Cloud Solutions', 'font-size: 14px; color: #94a3b8;');
+});
+</script>
+
+<!-- Meta tags for better SEO and social sharing -->
+<meta name="theme-color" content="#0f172a">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+
+<!-- Open Graph / Social Media Meta Tags -->
+<meta property="og:type" content="website">
+<meta property="og:site_name" content="theG's Cloud">
+<meta property="og:locale" content="ko_KR">
+<meta name="twitter:card" content="summary_large_image">
