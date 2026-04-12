@@ -1,0 +1,51 @@
+---
+title: "Claude Code 설치"
+sidebar:
+  order: 4
+---
+
+# Claude Code 설치
+
+WSL2 를 설치한 큰 2가지 이유중 두 번째!
+
+기존 사용하던 AI agent와 달리 claude code 는 _**직접 작업을 수행**_하게 하는데 더 쉽게 적용 가능합니다.
+
+Claude Code는 node.js (node) 기반에서 동작하는 애플리케이션입니다.
+
+—> node.js 실제 자바스크립트 코드를 실행하는 **Node.js 엔진(런타임)**
+
+사전 필수 사항: NVM (Node Version Manager)
+
+- Node.js 버전 관리 도구
+- 여러 버전의 Node.js를 설치하고 전환 가능
+
+아래의 링크에서 설치 방법 확인
+
+[NVM 설치](https://www.notion.so/NVM-28c9de7ee07180158050e198c3d1851f?pvs=21)
+
+Claude Code 설치 (NVM을 통해 한 줄의 명령어로 claude code가 설치됨)
+
+```bash
+npm install -g @anthropic-ai/claude-code
+```
+
+설치 버전확인
+
+```bash
+claude --version
+```
+
+새로운 프로젝트를 만들거나 기존 프로젝트 폴더로 이동합니다. 본 예시에서는 새로운 프로젝트로 만들어보겠습니다.
+
+```bash
+mkdir ~/Projects/claude_code_test
+cd ~/Projects/claude_code_test
+```
+
+```bash
+claude
+```
+
+구독으로 연결합니다.
+
+[Super Claude (심화, 참고만!)](https://www.notion.so/Super-Claude-28d9de7ee07180d1aaf3e93807c4372d?pvs=21)
