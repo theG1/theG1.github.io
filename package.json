@@ -1,0 +1,17 @@
+{
+  "name": "theg1-cloud",
+  "type": "module",
+  "version": "0.0.1",
+  "scripts": {
+    "dev": "astro dev",
+    "start": "astro dev",
+    "build": "astro build",
+    "preview": "astro preview",
+    "astro": "astro"
+  },
+  "dependencies": {
+    "@astrojs/starlight": "^0.32.0",
+    "astro": "^5.7.0",
+    "zod": "^3.25.76"
+  }
+}

@@ -1,14 +1,10 @@
-# Jekyll build files
-_site/
-.sass-cache/
-.jekyll-cache/
-.jekyll-metadata
+# Astro build output
+dist/
+.astro/
 
-# Ruby
-Gemfile
-Gemfile.lock
-vendor/
-.bundle/
+# Node.js
+node_modules/
+npm-debug.log*
 
 # OS files
 .DS_Store
@@ -26,3 +22,7 @@ Thumbs.db
 
 # Scripts
 scripts/
+
+# Environment
+.env
+.env.local

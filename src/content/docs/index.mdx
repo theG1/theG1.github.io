@@ -1,0 +1,36 @@
+---
+title: theG's Cloud
+description: Cloud Solutions Architect의 기술 지식베이스
+template: splash
+hero:
+  title: theG's Cloud
+  tagline: Cloud, Kubernetes, AI, OpenShift 등 다양한 클라우드 기술에 대한 기록입니다.
+  actions:
+    - text: 시작하기
+      link: /cloud/
+      icon: right-arrow
+      variant: primary
+    - text: GitHub
+      link: https://github.com/theG1/theG1.github.io
+      icon: external
+      variant: secondary
+---
+
+import { Card, CardGrid } from '@astrojs/starlight/components';
+
+## 주제별 문서
+
+<CardGrid stagger>
+  <Card title="Cloud" icon="cloud">
+    클라우드 아키텍처와 솔루션에 대한 정리입니다.
+  </Card>
+  <Card title="Kubernetes" icon="rocket">
+    Kubernetes와 PaaS 환경에 대한 학습 내용입니다.
+  </Card>
+  <Card title="AI 개발" icon="star">
+    AI 활용 개발환경 설정, Docker, Claude Code 활용법을 다룹니다.
+  </Card>
+  <Card title="OpenShift (DO180)" icon="open-book">
+    Red Hat OpenShift 공식 교육과정(DO180) 학습 내용입니다.
+  </Card>
+</CardGrid>

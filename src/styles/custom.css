@@ -1,0 +1,75 @@
+/* theG's Cloud - Custom Starlight styles */
+
+/* Smooth scrolling */
+html {
+  scroll-behavior: smooth;
+}
+
+/* Enhanced code blocks */
+.expressive-code {
+  border-radius: 8px !important;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.25) !important;
+  margin: 1.25rem 0 !important;
+}
+
+/* Better table styling */
+.sl-markdown-content table {
+  border-radius: 6px;
+  overflow: hidden;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+  display: table;
+  width: 100%;
+}
+
+.sl-markdown-content th {
+  background-color: var(--sl-color-bg-sidebar);
+}
+
+/* Enhanced blockquotes */
+.sl-markdown-content blockquote {
+  border-left: 4px solid var(--sl-color-accent);
+  background-color: var(--sl-color-bg-sidebar);
+  border-radius: 0 6px 6px 0;
+  padding: 0.75rem 1rem;
+  margin: 1rem 0;
+}
+
+.sl-markdown-content blockquote p {
+  margin: 0;
+}
+
+/* Better list spacing */
+.sl-markdown-content ul li,
+.sl-markdown-content ol li {
+  margin-bottom: 0.35rem;
+}
+
+/* Hero page styling */
+.hero {
+  padding-block: 4rem !important;
+}
+
+/* Better link styling */
+.sl-markdown-content a:not([class]) {
+  text-decoration-color: var(--sl-color-accent);
+  text-underline-offset: 3px;
+}
+
+.sl-markdown-content a:not([class]):hover {
+  color: var(--sl-color-accent-high);
+}
+
+/* Badge styles */
+.badge {
+  display: inline-block;
+  padding: 0.2em 0.55em;
+  font-size: 0.75rem;
+  font-weight: 700;
+  border-radius: 0.25rem;
+  vertical-align: middle;
+}
+
+.badge-primary { background-color: var(--sl-color-accent); color: white; }
+.badge-success { background-color: #22c55e; color: white; }
+.badge-warning { background-color: #f59e0b; color: black; }
+.badge-danger  { background-color: #ef4444; color: white; }
